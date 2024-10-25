@@ -6,10 +6,11 @@ import FoodBot from './routes/FoodBot';
 import AlternatesSuggestions from './routes/AlternatesSuggestions';
 import Profile from './routes/Profile';
 import Home from './routes/Home'; // Import the Home component
+import Login from './routes/Login'; // Import the Login component
 import "./App.css"
 
 const userData = {
-  name: "Jane Doe",
+  name: "Rahul",
   bmi: 16.5,
   status: "Normal",
   age: 10,
@@ -29,6 +30,7 @@ function App() {
         <Route path="/foodbot" element={<FoodBot />} />
         <Route path="/alternates-suggestions" element={<AlternatesSuggestions />} />
         <Route path="/profile" element={<Profile userData={userData} />} /> {/* Pass userData as a prop */}
+        <Route path="/login" element={<Login />} /> {/* Add the Login route */}
       </Routes>
     </Router>
   );

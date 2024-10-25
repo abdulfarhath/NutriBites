@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+
+# Logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+
+# Production build
+build/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
