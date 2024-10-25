@@ -13,6 +13,7 @@ const Navbar = () => {
                     <Link to="/">NutriBites</Link>
                 </div>
                 <ul className="flex space-x-8">
+                <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/">home</Link></li>
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/calculate-kcal">Calculate Kcal</Link></li>
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/add-food">Add Food</Link></li>
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/foodbot">FoodBot</Link></li>
