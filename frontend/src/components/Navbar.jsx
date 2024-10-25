@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '@fontsource/roboto'; // Import Roboto font
 import '@fontsource/pacifico'; // Import Pacifico font for logo
 
@@ -9,39 +9,72 @@ const Navbar = () => {
     return (
         <nav className="bg-[#365436] rounded-full m-5  w-[95%]  p-4 shadow-lg mx-auto">
             <div className="container mx-auto flex justify-between items-center">
-                <div className="text-[#D6533F] text-3xl font-bold font-pacifico">
-                    <Link to="/">
+                <div className="text-[#ffffff] text-3xl font-bold font-pacifico">
+                    <NavLink to="/">
                         NutriBites
-                    </Link>
+                    </NavLink>
                 </div>
                 <ul className="flex space-x-12">
-                    <li><Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to="/">
-                        Home
-                    </Link>
-                    </li>
                     <li>
-                        <Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to="/calculate-kcal">
-                            Calculate Kcal
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to="/add-food">
-                            Add Food
-                        </Link
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to="/" 
+                            exact
                         >
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to="/foodbot">
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to="/calculate-kcal"
+                        >
+                            Calculate
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to="/add-food"
+                        >
+                            Add Food
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to="/foodbot"
+                        >
                             FoodBot
-                        </Link>
+                        </NavLink>
                     </li>
                     <li>
-                        <Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to="/plan">Plan</Link>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to="/plan"
+                        >
+                            Plan
+                        </NavLink>
                     </li>
                     <li>
-                        <Link className="text-[#D6533F] text-sm font-roboto  transition duration-300" to={isLoggedIn ? "/profile" : "/login"}>
+                        <NavLink 
+                            className={({ isActive }) => 
+                                isActive ? "text-[#ffffff] text-sm font-roboto transition duration-300 underline" : "text-[#ffffff] text-sm font-roboto transition duration-300"
+                            } 
+                            to={isLoggedIn ? "/profile" : "/login"}
+                        >
                             {isLoggedIn ? "Profile" : "Login"}
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </div>

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 
 const CalculateKcal = () => {
     const [foodItems, setFoodItems] = useState([{ food: '', quantity: '' }]);
+    const [nutritionData, setNutritionData] = useState([]);
 
     const handleAddMore = () => {
         setFoodItems([...foodItems, { food: '', quantity: '' }]);
@@ -21,10 +22,44 @@ const CalculateKcal = () => {
         setFoodItems(values);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Handle submit logic here
+        const results = [];
+
+        for (const item of foodItems) {
+            const response = await fetch(`https://api.edamam.com/api/nutrition-data?app_id=208599f5&app_key=f88e7211c4d123c7fd50881b5585e744&nutrition-type=logging&ingr=${item.quantity}%20${item.food}`);
+            const data = await response.json();
+            results.push({
+                food: item.food,
+                quantity: item.quantity,
+                calories: data.calories,
+                totalNutrients: data.totalNutrients
+            });
+        }
+
+        setNutritionData(results);
     };
+
+    const calculateTotals = () => {
+        const totals = {
+            calories: 0,
+            totalNutrients: {}
+        };
+
+        nutritionData.forEach(data => {
+            totals.calories += data.calories;
+            Object.keys(data.totalNutrients).forEach(key => {
+                if (!totals.totalNutrients[key]) {
+                    totals.totalNutrients[key] = { quantity: 0 };
+                }
+                totals.totalNutrients[key].quantity += data.totalNutrients[key].quantity;
+            });
+        });
+
+        return totals;
+    };
+
+    const totals = calculateTotals();
 
     return (
         <div>
@@ -77,16 +112,37 @@ const CalculateKcal = () => {
                 <table className="min-w-full mt-8 bg-white border border-gray-200">
                     <thead>
                         <tr className="bg-gray-100">
-                            <th className="py-2 px-4 border-b">Food</th>
-                            <th className="py-2 px-4 border-b">Quantity</th>
-                            <th className="py-2 px-4 border-b">Calories</th>
-                            <th className="py-2 px-4 border-b">Protein</th>
-                            <th className="py-2 px-4 border-b">Carbs</th>
-                            <th className="py-2 px-4 border-b">Fats</th>
+                            <th className="py-2 px-4 border-b">Attribute</th>
+                            {nutritionData.map((data, index) => (
+                                <th key={index} className="py-2 px-4 border-b">{data.food}</th>
+                            ))}
+                            <th className="py-2 px-4 border-b">Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Data will be populated here */}
+                        <tr>
+                            <td className="py-2 px-4 border-b">Quantity</td>
+                            {nutritionData.map((data, index) => (
+                                <td key={index} className="py-2 px-4 border-b">{data.quantity}</td>
+                            ))}
+                            <td className="py-2 px-4 border-b"></td>
+                        </tr>
+                        <tr>
+                            <td className="py-2 px-4 border-b">Calories</td>
+                            {nutritionData.map((data, index) => (
+                                <td key={index} className="py-2 px-4 border-b">{data.calories}</td>
+                            ))}
+                            <td className="py-2 px-4 border-b">{totals.calories}</td>
+                        </tr>
+                        {nutritionData.length > 0 && Object.keys(nutritionData[0].totalNutrients).map((key) => (
+                            <tr key={key}>
+                                <td className="py-2 px-4 border-b">{key}</td>
+                                {nutritionData.map((data, index) => (
+                                    <td key={index} className="py-2 px-4 border-b">{data.totalNutrients[key].quantity}</td>
+                                ))}
+                                <td className="py-2 px-4 border-b">{totals.totalNutrients[key].quantity}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
