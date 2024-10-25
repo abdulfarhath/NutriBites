@@ -16,7 +16,7 @@ const Navbar = () => {
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/calculate-kcal">Calculate Kcal</Link></li>
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/add-food">Add Food</Link></li>
                     <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/foodbot">FoodBot</Link></li>
-                    <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/alternates-suggestions">Alternates & Suggestions</Link></li>
+                    <li><Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to="/plan">Plan</Link></li>
                     <li>
                         <Link className="text-white text-lg font-roboto hover:text-green-300 transition duration-300" to={isLoggedIn ? "/profile" : "/login"}>
                             {isLoggedIn ? "Profile" : "Login"}
