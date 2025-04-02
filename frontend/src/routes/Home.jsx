@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 export default function Home() {
     return (
@@ -58,6 +59,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold">Share your Journey With Us !!</h2>
                 </div>
             </div>
+            <Footer></Footer>
         </>
     );
 };
